@@ -29,6 +29,15 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	
+	// ...
+}
+
+void UGrabber::Release() {
+	UE_LOG(LogTemp, Display, TEXT("Released"));
+}
+
+void UGrabber::Grab() {
 	FVector start = GetComponentLocation();
 	FVector end = start + GetForwardVector() * MaxGrabDistance;
 
@@ -45,10 +54,4 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 		ECC_GameTraceChannel2,
 		Sphere
 		);
-	// ...
 }
-
-void UGrabber::Release() {
-	UE_LOG(LogTemp, Display, TEXT("Released"));
-}
-
