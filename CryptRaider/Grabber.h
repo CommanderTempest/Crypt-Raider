@@ -3,18 +3,18 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
-#include "Mover.generated.h"
+#include "Components/SceneComponent.h"
+#include "Grabber.generated.h"
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class CRYPTRAIDER_API UMover : public UActorComponent
+class CRYPTRAIDER_API UGrabber : public USceneComponent
 {
 	GENERATED_BODY()
 
 public:	
 	// Sets default values for this component's properties
-	UMover();
+	UGrabber();
 
 protected:
 	// Called when the game starts
@@ -24,15 +24,16 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	// Make available in Blueprint
+	UFUNCTION(BlueprintCallable)
+	void Release();
+
 private:
 	UPROPERTY(EditAnywhere)
-	bool ShouldMove = false;
-
-	UPROPERTY(EditAnywhere)
-	FVector MoveOffset;
+	float MaxGrabDistance = 400; // 4 meters
 		
 	UPROPERTY(EditAnywhere)
-	float MoveTime = 4;
+	float GrabRadius = 100;
 
-	FVector OriginalLocation;
+	void PrintDamage(const float& Damage); // Read-only reference variable
 };
