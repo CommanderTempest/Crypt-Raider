@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/SceneComponent.h"
+#include "PhysicsEngine/PhysicsHandleComponent.h"
 #include "Grabber.generated.h"
 
 
@@ -39,5 +40,10 @@ private:
 	UPROPERTY(EditAnywhere)
 	float GrabRadius = 100;
 
+	UPROPERTY(EditAnywhere)
+	float HoldDistance = 100;
+
 	void PrintDamage(const float& Damage); // Read-only reference variable
+	bool GetGrabableInReach(FHitResult& OutHitResult) const;
+	UPhysicsHandleComponent* GetPhysicsHandle() const;
 };
